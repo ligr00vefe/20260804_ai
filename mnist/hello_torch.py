@@ -23,3 +23,44 @@ test_loader = DataLoader(
     MNIST('mnist', train=False, transform=rules, download=True), batch_size=500, shuffle=False,
 )
 
+images, labels = next(iter(train_loader))
+print(images[0]); print(labels[0])
+
+model = nn.Sequential(
+    nn.Flatten(), # 2차원 텐서를 1차원으로 변환
+    nn.Linear(784, 128), # 입력값의 간소화(입력: 784, w:784, bias:1, f(x):128)
+    nn.ReLU(), # 음수의 값을 0으로 변환
+    nn.Dropout(p=0.2),
+    nn.Linear(128, 10),
+    nn.Softmax(dim=1), # 10개의 확률값이 있는 축을 따라 가장 큰 값을 가져 와라
+)
+print("\n=== DNN Summary ===")
+summary(model, input_size=(1, 28, 28))
+
+optimizer = torch.optim.Adam(model.parameters())
+
+criterion = nn.CrossEntropyLoss()
+
+for epoch in range(5):
+    for data in train_loader:
+        inputs, labels = data
+        outputs = model(inputs)
+        loss = criterion(outputs, labels)
+        optimizer.zero_grad() # 이전의 가중치를 0으로 만들어주고
+        loss.backward() # 다신 손실함수의 값을 가중치(기울기) 반영
+        optimizer.step() # 기울기의 보정치를 구하는 역할
+
+    print('Epoch: {},'.format(epoch), 'Loss: {:.3f}'.format(loss.item()))
+
+# DNN 모델의 평가
+correct = 0
+for images, labels in test_loader:
+    with torch.no_grad():
+        pred = model(images)
+    pred = torch.argmax(pred, 1)
+    for i in range(500):
+        if(pred[i] == labels[i]):
+            correct += 1
+
+print("\n=== DNN Accuracy ===")
+print(correct / 500)
