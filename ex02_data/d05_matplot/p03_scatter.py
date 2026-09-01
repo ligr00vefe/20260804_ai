@@ -17,8 +17,8 @@ area = (30 * np.random.rand(n)) ** 2 # 한점당 영역을 50개 생성
 # print(area, len(area))
 colors = np.random.rand(n) # 색상도 50개 생성
 
-# plt.scatter(x, y, s=area, c=colors)
-# plt.scatter(x, y, s=area, c=colors, alpha=0.5, cmap='Spectral')
-plt.scatter(x, y, s=area, c=colors, alpha=0.5, cmap='spring')
+plt.scatter(x, y, s=area, c=colors)
+# # plt.scatter(x, y, s=area, c=colors, alpha=0.5, cmap='Spectral')
+# plt.scatter(x, y, s=area, c=colors, alpha=0.5, cmap='spring')
 plt.colorbar()
 plt.show()

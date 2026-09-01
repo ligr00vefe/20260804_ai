@@ -10,6 +10,6 @@ for i, v in enumerate(x):
            fontsize=9,
            color='blue',
            horizontalalignment='center',  # horizontalalignment (left, center, right)
-           verticalalignment='bottom')  # verticalalignment (top, center, bottom)
+           verticalalignment='top')  # verticalalignment (top, center, bottom)
 
 plt.show()

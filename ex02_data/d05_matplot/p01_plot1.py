@@ -2,10 +2,12 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import lineStyles
 import numpy as np
 
+# pip install matplotlib
 # Line Chart(선도표) :: y축에 대한 데이터만 있을 경우
 # 점들을 연결하여 데이터의 변화를 직선적으로 관찰할 수 있다.
+
 data = [100, 250, 140, 300, 500]
-# plt.plot(data); plt.show()
+plt.plot(data); plt.show()
 
 # Line Chart(선도표) :: x, y축에 대한 데이터로 차트를 표기
 # 점들을 연결하여 데이터의 변화를 직선적으로 관찰할 수 있다.
@@ -14,57 +16,58 @@ data = [100, 250, 140, 300, 500]
 # color명으로 색상 지정, #RRGGBB, b,g,r,c,m,y,k,w
 xdata = [10, 20, 30, 40, 50]
 ydata = [10000, 15000, 33000, 34000, 60000]
-# plt.plot(xdata, ydata); plt.show()
-# plt.plot(xdata, ydata, color='green'
-#          , linestyle='-.', marker='d'); plt.show()
-# plt.plot(xdata, ydata, 'rs'); plt.show()
-# plt.plot(xdata, ydata, 'rs'); plt.show()
+plt.plot(xdata, ydata); plt.show()
+plt.plot(xdata, ydata, color='green'
+         , linestyle='-.', marker='d'); plt.show()
+plt.plot(xdata, ydata, 'rs'); plt.show()
+plt.plot(xdata, ydata, 'rs'); plt.show()
 
-# plt.plot([4, 5, 6], marker="1") # 1,2,3,4
-# plt.plot([3, 4, 5], marker="H") # D, d, s, p, *, h, H
-# plt.plot([2, 3, 4], marker="|") # x, +, |, _
-# plt.plot([1, 2, 3], marker='*') # ., o, *, p, P
-# plt.plot([0, 1, 2], marker='$Z$') # $영문자$
-# plt.show()
+plt.plot([4, 5, 6], marker="1") # 1,2,3,4
+plt.plot([3, 4, 5], marker="H") # D, d, s, p, *, h, H
+plt.plot([2, 3, 4], marker="|") # x, +, |, _
+plt.plot([1, 2, 3], marker='*') # ., o, *, p, P
+plt.plot([0, 1, 2], marker='$Z$') # $영문자$
+plt.show()
 
-# x = [1, 2, 3, 4]
-# y = [2, 3, 5, 10]
-#
-# plt.plot(x, y)
-# plt.xlabel('X-Axis')
-# plt.ylabel('Y-Axis')
-# x의 인덱스로 범위를 지정, 2단계 이하만 적용
-# plt.fill_between(x[1:3], y[1:3], alpha=0.5)
-# plt.fill_betweenx(y[2:4], x[2:4], alpha=0.5)
-# plt.show()
+x = [1, 2, 3, 4]
+y = [2, 3, 5, 10]
+
+plt.plot(x, y)
+plt.xlabel('X-Axis123')
+plt.ylabel('Y-Axis')
+# x[1:3]은 x의 2,3영역은 색상치고 y[1:3]의 y의 3,5영역은 뺌
+plt.fill_between(x[1:3], y[1:3], alpha=0.5)  #X축 기준으로
+plt.fill_betweenx(y[2:4], x[2:4], alpha=0.5) #Y축 기준으로
+plt.show()
 
 
-# x = np.linspace(-10, 10, 100)
-# y = x ** 3
-#
-# plt.plot(x, y)
+x = np.linspace(-10, 10, 100)
+y = x ** 3
+plt.ylabel('x**3')
+plt.plot(x, y)
 
 # 축의 원점을 기준으로 양, 음의 방향이 대칭적인 로그 스케일로 표시
 # Symmetrical Log Scale :: symlog
-# plt.xscale('symlog')
-#
-# plt.show()
+plt.xscale('symlog') # X축 눈금을 대칭 로그 스케일
+plt.title("Symmetrical Log Scale Graph")
+plt.show()
 
 # start: 시작, stop: 끝, num: 단계(단계가 클수록 부드러워짐)
-# x = np.linspace(0, 5, 100)
-# y = np.exp(x)
-
-# plt.plot(x, y)
-# plt.yscale('linear')
-# plt.yscale('log')
-# plt.yscale('symlog')
-# plt.yscale('logit')
-# plt.show()
+x = np.linspace(0, 5, 100)
+y = np.exp(x) # 자연상수 e인 지수함수 e^x 값(Exponential)을 계산
+# x가 0이면 e의x승의 값은 1, x가 1이면 대략 2.7183
+plt.plot(x, y)
+# plt.yscale('linear') # 선형스케일 일정한 간격
+# plt.yscale('log') # 로그 스케일 10영승,10일승,10이승...
+# plt.yscale('symlog') # 대칭로그 스케일 0근처값과 음수영역을 표시
+plt.yscale('logit') # 로짓 스케일
+plt.title("linspace")
+plt.show()
 
 plt.rcParams['font.family'] = 'Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] = False
 
-x = np.arange(0, 2, 0.2)
+x = np.arange(0, 2, 0.2) # 10단계
 plt.plot(x, x, 'b')
 plt.plot(x, x**2, color='#e35f62', marker='*', linewidth=2)
 plt.plot(x, x**3, color='springgreen', marker='^', markersize=9)

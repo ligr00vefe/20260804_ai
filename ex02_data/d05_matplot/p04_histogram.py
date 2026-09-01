@@ -42,5 +42,5 @@ plt.ylim(y_min, y_max + 0.05)
 plt.yticks([])
 plt.xticks([(xs[i] + xs[i + 1]) / 2 for i in range(0, len(xs) - 1)],
            ["{:.1f} ~ {:.1f}".format(xs[i], xs[i + 1]) for i in range(0, len(xs) - 1)])
-
+plt.legend()
 plt.show()
