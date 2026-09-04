@@ -64,7 +64,9 @@ images, labels = next(iter(train_loader))
 merged = torchvision.utils.make_grid(images)
 sample(merged)
 
+# 모델을 생성하는 이유는 특징을 추출 과정을 정의하는 것
 model = nn.Sequential(
+    ### 특징추출 ###
     # batch: 64, inChannel: 3, w: 32, h: 32 :: 64*3*32*32
     # out_channels :: 6개의 특징 맵을 만들어 냄
     # kernel_size 필터 :: 3*2*2
@@ -75,11 +77,15 @@ model = nn.Sequential(
     nn.MaxPool2d(kernel_size=2, stride=2),
     nn.Conv2d(6, 16, kernel_size=2),
     nn.ReLU(),
-    nn.Flatten(),
-    nn.Linear(16*14*14, 120),
+
+    ### 분류 ###
+    nn.Flatten(), # 현재의 데이터를 1차원으로 펼침
+
+    # DNN의 뉴런층, 완전연결층(Fully Connected Layer)::16×14×14=3136
+    nn.Linear(16*14*14, 120), # 3136 -> 120
     nn.Linear(120, 84),
-    nn.Linear(84, 10),
-    nn.Softmax(dim=1)
+    nn.Linear(84, 10), # 10개의 클래스를 분류위한 모델
+    nn.Softmax(dim=1) # [0.12, 0.03,...] 이 벡터의 10개 합은 1.0
 )
 
 print('\n=== model 요약 ===')
@@ -117,7 +123,7 @@ print('최종 학습 시간: {:.1f}초'.format(end - begin))
 
 
 ########## 인공 신경망 평가 ##########
-# 이미지 라벨
+# 10개의 클래스를 분류하려고 설계, 이미지 라벨은 10개중 하나임.
 classes = ['airplane', 'automobile', 'bird', 'cat', 'deer',
            'dog', 'frog', 'horse', 'ship', 'truck']
 # 혼동 행렬 초기화
